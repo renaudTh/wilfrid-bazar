@@ -1,7 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ArticleView from '../views/ArticleView.vue'
+<<<<<<< HEAD
 import LoginView from '../views/LoginView.vue'
+=======
+import NewArticleView from '../views/NewArticleView.vue'
+
+>>>>>>> 8204ad7 (Setup add article view)
 const routes = [
   {
     path: '/',
@@ -17,6 +22,11 @@ const routes = [
     path: '/article/:id',
     name: 'article',
     component: ArticleView,
+  },
+  {
+    path: '/articles/new',
+    name: 'new_article',
+    component: NewArticleView
   },
   {
     path: '/about',

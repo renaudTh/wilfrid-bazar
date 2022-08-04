@@ -1,4 +1,5 @@
 <template>
+<h2>Liste de tous les articles</h2>
  <AllArticles />
 </template>
 
