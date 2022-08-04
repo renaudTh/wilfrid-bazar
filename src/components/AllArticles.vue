@@ -13,12 +13,14 @@ import router from '@/router';
 
 const articles = ref([])
 
+
 const fetchAll = async () => {
     let { data: recv, error } = await supabase
     .from('articles')
     .select('*')
     if(error) throw new Error(error);
     articles.value = recv;
+
 }
 
 const showOne = (id) => {
@@ -31,4 +33,6 @@ onMounted(() => {
 </script>
 
 <style>
+
+
 </style>

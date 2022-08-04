@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <li>
     {{ article.nom }}
-  </div>
+  </li>
 </template>
 
 <script setup>
@@ -15,6 +15,8 @@ defineProps([
 
 </script>
 
-<style>
-
+<style scoped>
+  li{
+    cursor: pointer;
+  }
 </style>

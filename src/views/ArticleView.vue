@@ -1,5 +1,5 @@
 <template>
-  <h2>{{article.nom}}</h2><p>{{article.desciption}}</p><p><strong>{{showPrice(article)}}</strong></p>
+  <h2>{{article.nom}}</h2><p>{{article.desciption}}</p><p><strong v-if="isLoaded">{{showPrice(article)}}</strong></p>
 </template>
 
 <script setup>
@@ -9,6 +9,7 @@ import { useRoute } from 'vue-router'
 
 const article = ref({})
 const route = useRoute()
+const isLoaded = ref(false);
 
 const getOne = async (id) => {
 
@@ -20,7 +21,7 @@ const getOne = async (id) => {
 
     if(error) throw new Error(error);
     article.value = data;
-
+    isLoaded.value = true;
 }
 
 const showPrice = (article) => {
