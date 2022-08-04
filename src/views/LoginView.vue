@@ -11,6 +11,8 @@
 <script setup>
 import {ref} from 'vue';
 import { supabase } from '@/supabase.js';
+import { user_store} from '../stores/userStore';
+
 const email = ref();
 const password = ref();
 
@@ -20,7 +22,9 @@ const handleLogin = async () => {
         password: password.value,
     })
     if(error) throw new Error(error);
-    console.log(user, session);
+    console.log(session);
+    user_store.user = user;
+    user_store.logged = true;
 }
 </script>
 
