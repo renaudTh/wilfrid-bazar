@@ -1,6 +1,6 @@
 <template>
   <h2>{{ article.nom }}</h2>
-  <DeleteArticle :article_id="article.id"/>
+  <DeleteArticle v-if="isLoaded" :article_id="article.id"/>
   <p>{{ article.desciption }}</p>
   <p>
     <strong v-if="isLoaded">{{ showPrice(article) }}</strong>
@@ -31,7 +31,7 @@ const getOne = async (id) => {
 
 const showPrice = (article) => {
   return article.prix ? article.prix + " €" : "Gratuit";
-};
+};  
 onMounted(() => {
   getOne(route.params.id);
 });

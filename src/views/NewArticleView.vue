@@ -1,8 +1,10 @@
-<template>
+<template >
   <h2>Ajouter un article</h2>
   <form autocomplete="off" @submit.prevent="onAddArticle">
     <label for="nom">Nom de l'article : </label><br>
-    <input v-model="nom" type="text" name="nom" id="nom" required><br>
+    <input v-model="nom" type="text" name="nom" id="nom" required><br> 
+     <label for="categorie">Catégorie : </label><br>
+    <SelectCategorie  @change-category="onChangeCategory"/><br>
     <label for="descriptions">Description</label> <br>
     <textarea type="text" @change="onChangeDescription" name="description" id="description" cols="30" rows="10"
       required></textarea><br>
@@ -18,22 +20,28 @@
 <script setup>
 import { ref } from 'vue';
 import { supabase } from '@/supabase.js';
+import SelectCategorie from '@/components/SelectCategorie.vue';
 
 const nom = ref("");
 const description = ref("");
 const prix = ref(0);
 const image = ref("");
 const added = ref(false);
+const category = ref(null);
 
 const onChangeDescription = (evt) => {
   description.value = evt.target.value;
+}
+
+const onChangeCategory = (id) => {
+  category.value = id
 }
 const onAddArticle = async () => {
 
   const { error } = await supabase
     .from('articles')
     .insert([
-      { nom: nom.value, desciption: description.value, prix: prix.value, categorie: 1 },
+      { nom: nom.value, categorie: category.value, desciption: description.value, prix: prix.value},
     ])
   if (error) throw new Error(error.details);
   added.value = true;
