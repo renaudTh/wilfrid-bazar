@@ -10,21 +10,18 @@
 
 <script setup>
 import {ref} from 'vue';
-import { supabase } from '@/supabase.js';
-import { user_store} from '../stores/userStore';
+//import { supabase } from '@/supabase.js';
+//import { user_store} from '../stores/userStore';
 
 const email = ref();
 const password = ref();
 
 const handleLogin = async () => {
-    const { user, session, error } = await supabase.auth.signIn({
+    /*const { user, session, error } = await supabase.auth.signIn({
         email: email.value,
         password: password.value,
     })
-    if(error) throw new Error(error);
-    console.log(session);
-    user_store.user = user;
-    user_store.logged = true;
+    if(error) throw new Error(error);*/
 }
 </script>
 
