@@ -1,6 +1,6 @@
 <template>
   <select v-if="loaded" name="category" id="category">
-    <option value=""></option>
+    <option value="">Choisir</option>
     <option v-for="category in categories" :key="category.id" :value="category.id">{{category.nom}}</option>
   </select>
 </template>
