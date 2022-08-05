@@ -4,7 +4,7 @@
     <label for="nom">Nom de l'article : </label><br>
     <input v-model="nom" type="text" name="nom" id="nom" required><br> 
      <label for="categorie">Catégorie : </label><br>
-    <SelectCategorie  @change-category="onChangeCategory"/><br>
+    <SelectCategory  @change-category="onChangeCategory"/><br>
     <label for="descriptions">Description</label> <br>
     <textarea type="text" @change="onChangeDescription" name="description" id="description" cols="30" rows="10"
       required></textarea><br>
@@ -20,7 +20,7 @@
 <script setup>
 import { ref } from 'vue';
 import { supabase } from '@/supabase.js';
-import SelectCategorie from '@/components/SelectCategorie.vue';
+import SelectCategory from '@/components/SelectCategory.vue';
 
 const nom = ref("");
 const description = ref("");
