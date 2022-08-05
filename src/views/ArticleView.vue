@@ -30,7 +30,7 @@ const getOne = async (id) => {
 };
 
 const showPrice = (article) => {
-  return article.prix ? article.prix + " €" : "Gratuit";
+  return (article.prix > 0) ? article.prix + " €" : "Gratuit";
 };  
 onMounted(() => {
   getOne(route.params.id);

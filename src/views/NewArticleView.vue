@@ -8,7 +8,7 @@
     <label for="descriptions">Description</label> <br>
     <textarea type="text" @change="onChangeDescription" name="description" id="description" cols="30" rows="10"
       required></textarea><br>
-    <label for="prix">prix (vide si gratuit)</label><br>
+    <label for="prix">prix</label><br>
     <input v-model="prix" type="number" min="0" step="0.5" name="prix" id="prix"><br>
     <label for="image">Ajouter une image</label><br>
     <input @change="image" type="file" name="image" id="image"><br><br>
@@ -35,6 +35,7 @@ const onChangeDescription = (evt) => {
 
 const onChangeCategory = (id) => {
   category.value = id
+
 }
 const onAddArticle = async () => {
 
