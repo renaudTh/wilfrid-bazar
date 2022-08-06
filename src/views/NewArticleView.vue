@@ -26,7 +26,8 @@ import SelectCategory from '@/components/SelectCategory.vue';
 const nom = ref("");
 const description = ref("");
 const prix = ref(0);
-const image = ref([]);
+const image = ref(null);
+const fileName = ref(null);
 const added = ref(false);
 const category = ref(null);
 
@@ -49,21 +50,13 @@ const uploadImage = async () => {
   if (!image.value) return true;
   const file = image.value;
   const ext = file.name.split(".").pop()
-  const fileName = `${Math.random()}.${ext}`
-  const filePath = `${fileName}`
+  fileName.value = `${Math.random()}.${ext}`
 
-  let {data,  error: uploadError } = await supabase.storage
-    .from("articles-images")
-    .upload(filePath, file)
+  let {error: uploadError } = await supabase.storage
+    .from(process.env.VUE_APP_SUPABASE_BUCKET)
+    .upload(fileName.value, file)
   if (uploadError) throw new Error(uploadError.message)
-  console.log(data);
-  const { publicURL, error } = supabase
-  .storage
-  .from('articles-images')
-  .getPublicUrl(filePath);
 
-  if(error) throw new Error(error.message);
-  console.log(publicURL);
   return true;
 
 }
@@ -75,7 +68,7 @@ const onAddArticle = async () => {
     const { error } = await supabase
       .from('articles')
       .insert([
-        { nom: nom.value, categorie: category.value, description: description.value, prix: prix.value },
+        { nom: nom.value, categorie: category.value, description: description.value, prix: prix.value, image_name: fileName.value},
       ])
     if (error) {
       console.log(error.message);
