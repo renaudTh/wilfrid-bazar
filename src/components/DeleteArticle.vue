@@ -34,7 +34,7 @@ const deleteArticle = async () => {
 span {
     padding: 10px;
     background-color: rgb(200, 0, 0);
-    border-radius: 10px;
+    border-radius: 5px;
     color: white;
     cursor: pointer;
 }
