@@ -1,6 +1,6 @@
 <template >
   <h2>Ajouter un article</h2>
-  <form autocomplete="off" @submit.prevent="onAddArticle">
+  <form id="formulaire" autocomplete="off" @submit.prevent="onAddArticle">
     <label for="nom">Nom de l'article : </label><br>
     <input v-model="nom" type="text" name="nom" id="nom" required><br>
     <label for="categorie">Catégorie : </label><br>
@@ -14,6 +14,7 @@
     <input @change="onChangeImage" type="file" name="image" id="image" accept=".jpg, .jpeg, .png"
       capture="camera"><br><br>
     <input type="submit" value="Ajouter un article">
+    <span v-if="loading">Loading...</span>
   </form>
   <p v-if="added" style="color:green"> {{ nom }} was succesfully added ! </p>
 </template>
@@ -30,6 +31,7 @@ const image = ref(null);
 const fileName = ref(null);
 const added = ref(false);
 const category = ref(null);
+const loading = ref(false);
 
 const onChangeDescription = (evt) => {
   description.value = evt.target.value;
@@ -61,8 +63,8 @@ const uploadImage = async () => {
 
 }
 
-const onAddArticle = async () => {
-
+const onAddArticle = async (event) => {
+  loading.value = true;
   const uploaded = await uploadImage();
   if (uploaded) {
     const { error } = await supabase
@@ -77,10 +79,16 @@ const onAddArticle = async () => {
     }
     added.value = true;
   }
+  loading.value = false;
+  setTimeout(() => {
+    event.target.reset()
+    nom.value = null
+    prix.value = 0
+    added.value = false;
 
-
-
+  }, 1500);
 } 
+
 </script>
 
 <style>

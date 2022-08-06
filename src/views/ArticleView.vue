@@ -1,6 +1,6 @@
 <template>
   <h2>{{ article.nom }}</h2>
-  <DeleteArticle v-if="isLoaded" :article_id="article.id" /> <br><br>
+  <DeleteArticle v-if="isLoaded && user_store.user" :article="article" /> <br><br>
   <img v-if="isLoaded && imageUrl" :src="imageUrl" alt="hello"><br>
   <p>{{ article.description }}</p>
   <p>
@@ -12,6 +12,7 @@
 import { supabase } from "@/supabase.js";
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
+import { user_store } from "@/stores/userStore.js";
 import DeleteArticle from "@/components/DeleteArticle.vue";
 
 const article = ref({});
@@ -28,7 +29,6 @@ const getOne = async (id) => {
   if (error) throw new Error(error);
   article.value = data;
   isLoaded.value = true;
-  console.log(data);
    getImageUrl();
 };
 
@@ -51,12 +51,20 @@ const getImageUrl = async () => {
 }
 onMounted(() => {
   getOne(route.params.id);
- 
+
 });
 </script>
 
 <style scoped>
+@media screen and (max-width: 480px) {
 img{
   max-width: 100%;
 }
+}
+@media screen and (min-width: 480px) {
+img{
+  max-width: 300px;
+}
+}
+
 </style>

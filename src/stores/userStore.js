@@ -1,7 +1,8 @@
 import { reactive } from 'vue'
+import { supabase } from '@/supabase'
 
 export const user_store = reactive({
     
-    logged: true,
-    user: {}
+    user: supabase.auth.user(),
+
 })
