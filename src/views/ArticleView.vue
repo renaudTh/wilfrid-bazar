@@ -1,7 +1,7 @@
 <template>
   <h2>{{article.nom}}</h2>
   <span>{{storeArticles.showCategory(article)}}</span><br><br>
-  <DeleteArticle v-if="user_store.user" :article="article" /> <br><br>
+  <DeleteArticle v-if="storeUser.user" :article="article" /> <br><br>
   <img v-if="imageUrl" :src="imageUrl" :alt="article.nom"><br>
 
   <p>{{ article.description }}</p>
@@ -13,13 +13,14 @@
 <script setup>
 
 import { useRoute } from "vue-router";
-import { user_store } from "@/stores/userStore.js";
+import { useUserStore } from "@/stores/userStore.js";
 import DeleteArticle from "@/components/DeleteArticle.vue";
 import { useArticleStore } from '@/stores/articleStore';
 import { onMounted, ref } from "@vue/runtime-core";
 
 
 const storeArticles = useArticleStore();
+const storeUser = useUserStore();
 
 const route = useRoute();
 const article = ref({})
