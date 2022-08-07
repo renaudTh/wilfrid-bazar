@@ -16,10 +16,9 @@ const showOne = (id) => {
     router.push('article/'+id);
 }
 onMounted(() => {
-    if(storeArticles.articles.length == 0){
-        storeArticles.fetchAll();
-    }
-        
+   
+    storeArticles.fetchAll();
+     
 }) 
 </script>
 
