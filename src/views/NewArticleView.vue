@@ -31,7 +31,6 @@ const article = ref({
   prix: 0,
   image_name: null,
   categorie: null,
-
 })
 
 const image = ref(null);
