@@ -12,12 +12,11 @@
 <script setup>
 import { user_store } from '@/stores/userStore'
 import { useArticleStore } from './stores/articleStore.js';
-import { useCategoriesStore } from './stores/categoriesStore.js';
 import { supabase } from './supabase.js';
 import router from './router/index.js';
 
 const storeArticles = useArticleStore()
-const storeCategories = useCategoriesStore();
+
 
 const logout = async () => {
   const { error } = await supabase.auth.signOut()
@@ -42,7 +41,6 @@ supabase.auth.onAuthStateChange((event, session) => {
   }
 })
 
-storeCategories.fetchAll();
 </script>
 <style>
 </style>

@@ -16,9 +16,8 @@ const showOne = (id) => {
     router.push('article/'+id);
 }
 onMounted(() => {
-   
+    
     storeArticles.fetchAll();
-     
 }) 
 </script>
 

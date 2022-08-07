@@ -1,6 +1,6 @@
 <template>
   <h2>{{article.nom}}</h2>
-  <span>{{categorie.nom}}</span><br><br>
+  <span>{{storeArticles.showCategory(article)}}</span><br><br>
   <DeleteArticle v-if="user_store.user" :article="article" /> <br><br>
   <img v-if="imageUrl" :src="imageUrl" :alt="article.nom"><br>
 
@@ -16,16 +16,31 @@ import { useRoute } from "vue-router";
 import { user_store } from "@/stores/userStore.js";
 import DeleteArticle from "@/components/DeleteArticle.vue";
 import { useArticleStore } from '@/stores/articleStore';
-import { useCategoriesStore } from "@/stores/categoriesStore.js";
+import { onMounted, ref } from "@vue/runtime-core";
+
+
 const storeArticles = useArticleStore();
-const storeCategories = useCategoriesStore();
 
 const route = useRoute();
-const article = storeArticles.getOne(route.params.id)
-const imageUrl = storeArticles.getImageUrl(article);
+const article = ref({})
+const imageUrl = ref(null) 
 
-const categorie = storeCategories.selectOne(article.categorie)
-console.log(categorie)
+const getArticle = async () => {
+  
+  let found = storeArticles.getOne(route.params.id)
+  if(!found){
+    article.value = await storeArticles.fetchOne(route.params.id);
+  }
+  else {
+    article.value = found
+  }
+  imageUrl.value = storeArticles.getImageUrl(article.value);
+    
+}
+onMounted(() => {
+  getArticle();
+})
+
 
 </script>
 
