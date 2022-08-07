@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import ArticleView from '../views/ArticleView.vue'
 import LoginView from '../views/LoginView.vue'
 import NewArticleView from '../views/NewArticleView.vue'
+import ArticleUpdateView from '../views/ArticleUpdateView.vue'
 import ChangePassword from '../views/ChangePassword.vue'
 import NotFound from '../views/NotFound.vue'
 
@@ -22,6 +23,11 @@ const routes = [
     path: '/article/:id',
     name: 'article',
     component: ArticleView,
+  },
+  {
+    path: '/article/update/:id',
+    name: 'article_update',
+    component: ArticleUpdateView,
   },
   {
     path: '/articles/new',

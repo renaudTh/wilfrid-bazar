@@ -2,6 +2,7 @@
   <h2>{{article.nom}}</h2>
   <span>{{storeArticles.showCategory(article)}}</span><br><br>
   <DeleteArticle v-if="storeUser.user" :article="article" /> <br><br>
+  <router-link v-if="storeUser.user" :to="`/article/update/${route.params.id}`">Update</router-link>
   <img v-if="imageUrl" :src="imageUrl" :alt="article.nom"><br>
 
   <p>{{ article.description }}</p>
