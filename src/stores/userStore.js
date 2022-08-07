@@ -4,5 +4,5 @@ import { supabase } from '@/supabase'
 export const user_store = reactive({
     
     user: supabase.auth.user(),
-
+    session: supabase.auth.session(),
 })

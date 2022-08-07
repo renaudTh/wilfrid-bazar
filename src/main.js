@@ -1,18 +1,28 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+
 import {user_store} from '@/stores/userStore'
+import {supabase} from '@/supabase'
+import { createPinia } from 'pinia'
 
-createApp(App).use(router).mount('#app')
+const pinia = createPinia()
+createApp(App).use(router).use(pinia).mount('#app')
 
-router.beforeEach( (to) => {
-    if (
-      // make sure the user is authenticated
-      !user_store.user &&
-      // ❗️ Avoid an infinite redirect
-      to.name !== 'login'
-    ) {
-      // redirect the user to the login page
-      return { name: 'login' }
+
+// router.beforeEach( (to) => {
+//     if (to.name.includes('#')) 
+//     {
+//         console.log('here')
+//       return { name: 'update/password' }
+//     }
+//   })
+
+supabase.auth.onAuthStateChange((event, session) => {
+
+    if(event == 'SIGN_IN'){
+        console.log(session, session.user)
+        user_store.user = session.user;
+        user_store.session = session;
     }
-  })
+})

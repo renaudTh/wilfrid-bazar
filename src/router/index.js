@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import ArticleView from '../views/ArticleView.vue'
 import LoginView from '../views/LoginView.vue'
 import NewArticleView from '../views/NewArticleView.vue'
-
+import ChangePassword from '../views/ChangePassword.vue'
 const routes = [
   {
     path: '/',
@@ -26,6 +26,11 @@ const routes = [
     component: NewArticleView
   },
   {
+    path: '/update/password',
+    name: 'update_password',
+    component: ChangePassword
+  },
+  {
     path: '/about',
     name: 'about',
     // route level code-splitting
@@ -41,3 +46,4 @@ const router = createRouter({
 })
 
 export default router
+

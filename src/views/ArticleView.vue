@@ -1,58 +1,27 @@
 <template>
-  <h2>{{ article.nom }}</h2>
-  <DeleteArticle v-if="isLoaded && user_store.user" :article="article" /> <br><br>
-  <img v-if="isLoaded && imageUrl" :src="imageUrl" alt="hello"><br>
+  <h2>{{article.nom}}</h2>
+  <DeleteArticle v-if="user_store.user" :article="article" /> <br><br>
+  <img v-if="imageUrl" :src="imageUrl" :alt="article.nom"><br>
   <p>{{ article.description }}</p>
   <p>
-    <strong v-if="isLoaded">{{ showPrice(article) }}</strong>
+    <strong>{{ storeArticles.showPrice(article) }}</strong>
   </p>
-</template>
+</template> 
 
 <script setup>
-import { supabase } from "@/supabase.js";
-import { onMounted, ref } from "vue";
+
 import { useRoute } from "vue-router";
 import { user_store } from "@/stores/userStore.js";
 import DeleteArticle from "@/components/DeleteArticle.vue";
+import { useArticleStore } from '@/stores/articleStore';
 
-const article = ref({});
+const storeArticles = useArticleStore();
+
 const route = useRoute();
-const isLoaded = ref(false);
-const imageUrl = ref();
-const getOne = async (id) => {
-  let { data, error } = await supabase
-    .from("articles")
-    .select("*")
-    .eq("id", id)
-    .single();
-
-  if (error) throw new Error(error);
-  article.value = data;
-  isLoaded.value = true;
-   getImageUrl();
-};
-
-const showPrice = (article) => {
-  return (article.prix > 0) ? article.prix + " €" : "Gratuit";
-};
-
-const getImageUrl = async () => {
-  if (article.value.image_name) {
-    const { publicURL, error } = await supabase
-      .storage
-      .from(process.env.VUE_APP_SUPABASE_BUCKET)
-      .getPublicUrl(article.value.image_name);
-
-      if(error) throw new Error(error.message);
-      imageUrl.value = publicURL;
-  }
+const article = storeArticles.getOne(route.params.id)
+const imageUrl = storeArticles.getImageUrl(article);
 
 
-}
-onMounted(() => {
-  getOne(route.params.id);
-
-});
 </script>
 
 <style scoped>
