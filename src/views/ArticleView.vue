@@ -16,8 +16,8 @@ import { useRoute } from "vue-router";
 import { useUserStore } from "@/stores/userStore.js";
 import DeleteArticle from "@/components/DeleteArticle.vue";
 import { useArticleStore } from '@/stores/articleStore';
-import { onMounted, ref } from "@vue/runtime-core";
-
+import { onBeforeMount, ref } from "@vue/runtime-core";
+import router  from '@/router'
 
 const storeArticles = useArticleStore();
 const storeUser = useUserStore();
@@ -28,17 +28,21 @@ const imageUrl = ref(null)
 
 const getArticle = async () => {
   
-  let found = storeArticles.getOne(route.params.id)
-  if(!found){
-    article.value = await storeArticles.fetchOne(route.params.id);
+  let foundInStore = storeArticles.getOne(route.params.id)
+  if(!foundInStore){
+    let found = await storeArticles.fetchOne(route.params.id);
+    if(!found){
+      router.push('/404')
+    }
+    else article.value = found
   }
   else {
-    article.value = found
+    article.value = foundInStore
   }
   imageUrl.value = storeArticles.getImageUrl(article.value);
     
 }
-onMounted(() => {
+onBeforeMount(() => {
   getArticle();
 })
 

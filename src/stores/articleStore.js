@@ -43,7 +43,9 @@ export const useArticleStore = defineStore({
                 )
             `).eq('id', id).single();
 
-            if (error) throw new Error(error);
+            if (error) {
+                return null;
+            }
             return recv;
         },
         getImageUrl(article) {

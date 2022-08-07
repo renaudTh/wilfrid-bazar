@@ -4,6 +4,9 @@ import ArticleView from '../views/ArticleView.vue'
 import LoginView from '../views/LoginView.vue'
 import NewArticleView from '../views/NewArticleView.vue'
 import ChangePassword from '../views/ChangePassword.vue'
+import NotFound from '../views/NotFound.vue'
+
+
 const routes = [
   {
     path: '/',
@@ -23,12 +26,17 @@ const routes = [
   {
     path: '/articles/new',
     name: 'new_article',
-    component: NewArticleView
+    component: NewArticleView,
   },
   {
     path: '/update/password',
     name: 'update_password',
     component: ChangePassword
+  },
+  {
+    path: '/404',
+    name: 'not_found',
+    component: NotFound
   },
   {
     path: '/about',
