@@ -1,62 +1,64 @@
 <template >
   <h2>Ajouter un article</h2>
   <ArticleForm :update="false" @article-submitted="onAddArticle"/>
+  <p v-if="loading">Loading...</p>
+  <p v-if="added" class="success">Your article was successfully added</p>
 </template>
 
 <script setup>
 import ArticleForm from '@/components/ArticleForm.vue';
+import { ref } from 'vue';
+import { supabase } from '@/supabase.js';
 
+import { useArticleStore } from '@/stores/articleStore.js';
 
-//TOdo: Create fileName if any file
-//TODO: Upload file if any
-//TODO: create object to be added
-//TODO: Add object in DB
-//import { ref } from 'vue';
-//import { supabase } from '@/supabase.js';
+const loading = ref(false);
+const added = ref(false);
+const storeArticles = useArticleStore();
 
-//import { useArticleStore } from '@/stores/articleStore.js';
+const uploadImage = async (file) => {
 
+  if (!file) return {
+    status: true,
+    imageName: null
+  };
 
-
-//const storeArticles = useArticleStore();
-
-
-/*
-const uploadImage = async () => {
-
-  if (!image.value) return true;
-  const file = image.value;
   const ext = file.name.split(".").pop()
-  article.value.image_name = `${Math.random()}.${ext}`
+  const name = `${Math.random()}.${ext}`
 
   let {error: uploadError } = await supabase.storage
     .from(process.env.VUE_APP_SUPABASE_BUCKET)
-    .upload(article.value.image_name, file)
+    .upload(name, file)
   if (uploadError) throw new Error(uploadError.message)
 
-  return true;
+  return {
+    status: true,
+    imageName: name,
+  };
 
-}*/
+}
 
 const onAddArticle = async (content) => {
 
-  console.log(content)
-
- /* loading.value = true;
-  const uploaded = await uploadImage();
-  if (uploaded) {
-    storeArticles.addArticle(article.value)
+  loading.value = true;
+  let uploadOk = await uploadImage(content.file)
+  if(uploadOk.status){
+    let article = {
+      nom : content.nom,
+      categorie: content.categorie,
+      prix: content.prix,
+      description: content.description,
+      image_name: uploadOk.imageName
+    }
+    storeArticles.addArticle(article);
+    loading.value = false;
     added.value = true;
-  }
-  loading.value = false;
-  setTimeout(() => {
-    event.target.reset()
-    article.value = {};
-
-  }, 1500);*/
-} 
-
+ }
+}
 </script>
 
-<style>
+<style scoped>
+.success{
+  color: green;
+}
 </style>

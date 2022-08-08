@@ -1,8 +1,11 @@
 <template>
   <h2>{{article.nom}}</h2>
   <span>{{storeArticles.showCategory(article)}}</span><br><br>
-  <DeleteArticle v-if="storeUser.user" :article="article" /> <br><br>
-  <router-link v-if="storeUser.user" :to="`/article/update/${route.params.id}`">Update</router-link>
+  <div>
+     <DeleteArticle v-if="storeUser.user" :article="article" />
+  <router-link class="update" v-if="storeUser.user" :to="`/article/update/${route.params.id}`">Update</router-link>
+  </div>
+ 
   <img v-if="imageUrl" :src="imageUrl" :alt="article.nom"><br>
 
   <p>{{ article.description }}</p>
@@ -51,6 +54,20 @@ onBeforeMount(() => {
 </script>
 
 <style scoped>
+div {
+  display: flex;
+  margin-bottom: 2px;
+}
+.update{
+  padding: 10px;
+  background-color: blue;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+.update:hover{
+  background-color:rgb(0,0,240);
+}
 @media screen and (max-width: 480px) {
 img{
   max-width: 100%;
