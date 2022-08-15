@@ -1,6 +1,6 @@
 <template>
   <select   v-model="selected" @change="$emit('change-category', selected)" name="category" id="category">
-   <option :value="null"></option>
+   <option :value="null">Sélectionner une catégorie</option>
    <option  v-for="category in storeCategories.categories" :key="category.id" :value="category.id">{{category.nom}}</option>
   </select>
 

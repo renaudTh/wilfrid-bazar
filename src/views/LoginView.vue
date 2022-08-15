@@ -1,9 +1,8 @@
 <template>
+<h2>Connexion</h2>
   <form  @submit.prevent="handleLogin">
-    <label for="email">email</label>
-    <input v-model="credentials.email" type="email" name="email" required><br>
-    <label for="password">password</label>
-    <input v-model="credentials.password" type="password" name="password" id="password" required><br/>
+    <input placeholder="email" v-model="credentials.email" type="email" name="email" required><br>
+    <input placeholder="password" v-model="credentials.password" type="password" name="password" id="password" required><br/>
     <input type="submit" value="Login">
   </form>
   <a  @click="sendForgottenMail">Mot de passe oublié</a>

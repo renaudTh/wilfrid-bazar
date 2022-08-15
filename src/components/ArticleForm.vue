@@ -4,20 +4,19 @@
     autocomplete="off"
     @submit.prevent="$emit('article-submitted', formContent)"
   >
-    <label for="nom">Nom de l'article : </label><br />
     <input
       v-model="formContent.nom"
       type="text"
       name="nom"
       id="nom"
+      placeholder="Le nom de l'article"
       required
     /><br />
-    <label for="categorie">Catégorie : </label><br />
+
     <SelectCategory
       :defaultSelected="formContent.categorie"
       @change-category="onChangeCategory"
     /><br />
-    <label for="descriptions">Description</label> <br />
     <textarea
       :value="formContent.description"
       @input="onChangeDescription"
@@ -26,10 +25,11 @@
       id="description"
       cols="30"
       rows="10"
+      placeholder="Une brève description"
       required
     ></textarea
     ><br />
-    <label for="prix">prix</label><br />
+    <label for="prix">Prix (facultatif)</label><br />
     <input
       v-model="formContent.prix"
       type="number"
@@ -97,4 +97,29 @@ if (props.update){
 </script>
 
 <style>
+
+input, select{
+  width: 100%;
+  height: 30px;
+  margin-bottom: 3px;
+  font-family: inherit;
+  border-radius: 5px;
+  padding: 5px;
+}
+textarea{
+  width: 100%;
+  height: 150px;
+  resize: none;
+  font-family: inherit;
+  padding: 5px;
+}
+
+input[type="submit"]{
+  height: 50px;
+  background-color: #f7f3e3;
+  border: none;
+  font-family: inherit;
+  border-radius: 5px;
+}
+
 </style>
