@@ -78,9 +78,8 @@ const onChangeImage = (evt) => {
 };
 const showSubmitName = props.update ? `Mettre à jour` : `Ajouter un article`;
 
-console.log(props.content)
-if (props.update)
-  formContent.value = {
+if (props.update){
+    formContent.value = {
     id: props.content.id,
     nom: props.content.nom,
     description: props.content.description,
@@ -91,6 +90,8 @@ if (props.update)
     ...formContent.value,
     categorie: (props.content.categories) ? props.content.categories.id : null,
   };
+}
+
 
 
 </script>

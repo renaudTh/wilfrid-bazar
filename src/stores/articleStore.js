@@ -102,6 +102,27 @@ export const useArticleStore = defineStore({
                 state.articles.push(article)
             })
         },
+       async uploadImage(file){
+
+            if (!file) return {
+              status: true,
+              imageName: null
+            };
+          
+            const ext = file.name.split(".").pop()
+            const name = `${Math.random()}.${ext}`
+          
+            let {error: uploadError } = await supabase.storage
+              .from(process.env.VUE_APP_SUPABASE_BUCKET)
+              .upload(name, file)
+            if (uploadError) throw new Error(uploadError.message)
+          
+            return {
+              status: true,
+              imageName: name,
+            };
+          
+          }
     },
     getters: {
         getOne: (state) => {
