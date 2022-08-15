@@ -16,3 +16,9 @@ createApp(App).use(router).use(pinia).mount('#app')
 //     }
 //   })
 
+//TODO: Add form subscription reactivity or each form
+//TODO: Refresh the update page
+//TODO: Make an article image component and store
+//TODO: Styling
+//TODO: Interesting feature
+//TODO: Admin Dashboard
