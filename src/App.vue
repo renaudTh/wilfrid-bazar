@@ -1,5 +1,5 @@
 <template>
-
+  <LogoBan />
   <NavBar />
   <router-view />
 </template>
@@ -10,6 +10,7 @@ import { supabase } from './supabase.js';
 
 
 import NavBar from './components/NavBar.vue'
+import LogoBan from './components/LogoBan.vue'
 
 
 const storeUser = useUserStore()
@@ -39,5 +40,10 @@ body {
   background-color: #1A281F;
   color: #ecf0f1;
 }
+#app{
 
+  max-width: 400px;
+  margin: auto;
+  padding: 0 10px 0 10px;
+}
 </style>

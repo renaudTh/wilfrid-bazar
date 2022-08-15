@@ -1,22 +1,16 @@
 <template>
     <div>
     <ArticleItem v-for="article in storeArticles.articles" :key="article.id" :article="article"
-        @click="showOne(article.id)" />
+       />
     </div>
 </template>
 
 <script setup>
 import { onMounted } from 'vue';
 import ArticleItem from './ArticleItem.vue';
-import router from '@/router';
 import { useArticleStore } from '@/stores/articleStore';
 
 const storeArticles = useArticleStore();
-
-
-const showOne = (id) => {
-    router.push('article/' + id);
-}
 
 const getArticles = async () => {
 

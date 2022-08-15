@@ -1,5 +1,5 @@
 <template >
-    <span @click="onDeleteArticle">Delete</span>
+    <div @click="onDeleteArticle"><i class="fa-solid fa-trash-can"></i></div>
 </template>
 
 <script setup>
@@ -20,15 +20,17 @@ const onDeleteArticle = async () => {
 </script>
 
 <style scoped>
-span {
-    padding: 10px;
-    background-color: rgb(200, 0, 0);
+div {
+    padding: 5px;
     border-radius: 5px;
-    color: white;
+    color: rgb(200, 0, 0);;
     cursor: pointer;
+    font-size: 18px;
+    text-align: center;
 }
 
-span:hover {
+div:hover {
     background-color: rgb(180, 0, 0);
+    color: #F7F3E3;
 }
 </style>

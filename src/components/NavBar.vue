@@ -35,8 +35,9 @@ nav {
 .link{
     color: white;
     margin: 10px;
+    cursor: pointer;
 }
 .link i{
-    font-size: 30px;
+    font-size: 25px;
 }
 </style>
